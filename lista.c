@@ -116,30 +116,20 @@ int lista_borrar(lista_t* lista){
         return -1;
     }
 
-    nodo_t* prev = (*lista).nodo_inicio;
-    nodo_t* aux = (*lista).nodo_inicio;
+    return lista_borrar_de_posicion(lista, (*lista).cantidad - 1);
 
-    while ((*aux).siguiente != NULL) {
-        prev = aux;
-        aux = (*aux).siguiente;
-    }
-
-    (*prev).siguiente = NULL;
-    free(aux);
-    ((*lista).nodo_fin) = prev;
-    ((*lista).cantidad) --;
-    
-    return 0;
 }
 
 /************************************************************************************* Lista borrar en posicion **************************************************************************************/
 
 int lista_borrar_de_posicion(lista_t* lista, size_t posicion){
 
-    /*TERMINAR*/
-
     if (!lista) {
         return -1;
+    }
+
+    if (posicion >= (*lista).cantidad) {
+        posicion = (*lista).cantidad - 1;
     }
 
     if (posicion == 0){
@@ -160,9 +150,11 @@ int lista_borrar_de_posicion(lista_t* lista, size_t posicion){
         i++;
     }
 
-    (*prev).siguiente = NULL;
+    (*prev).siguiente = (*aux).siguiente;
     free(aux);
-    ((*lista).nodo_fin) = prev;
+    if (!(*prev).siguiente) {
+        ((*lista).nodo_fin) = prev;
+    }
     ((*lista).cantidad) --;
 
     return 0;
@@ -203,15 +195,6 @@ void* lista_ultimo(lista_t* lista){
     }
     return lista_elemento_en_posicion(lista, (*lista).cantidad - 1);
     
-    /*if (lista == NULL){
-        return NULL;
-    }
-    if (!(*lista).nodo_fin) {
-        return NULL;
-    }
-
-    return (*(*lista).nodo_fin).elemento;*/
-
 }
 
 /******************************************************************************************** Lista vacia ********************************************************************************************/
@@ -231,6 +214,68 @@ size_t lista_elementos(lista_t* lista){
     } else {
         return (*lista).cantidad;
     }
+}
+
+/******************************************************************************************* Lista apilar ********************************************************************************************/
+
+int lista_apilar(lista_t* lista, void* elemento){
+    if (!lista) {
+        return -1;
+    }
+    return lista_insertar_en_posicion(lista, elemento, 0);
+}
+
+/***************************************************************************************** Lista desapilar *******************************************************************************************/
+
+int lista_desapilar(lista_t* lista){
+    if (!lista) {
+        return -1;
+    }
+    return lista_borrar_de_posicion(lista, 0);
+}
+
+/******************************************************************************************* Lista tope **********************************************************************************************/
+
+void* lista_tope(lista_t* lista){
+    if (!lista) {
+        return NULL;
+    }
+    return lista_elemento_en_posicion(lista, 0);
+}
+
+/***************************************************************************************** Lista encolar *********************************************************************************************/
+
+int lista_encolar(lista_t* lista, void* elemento){
+    if (!lista) {
+        return -1;
+    }
+    
+    return lista_insertar_en_posicion(lista, elemento, (*lista).cantidad);
+}
+
+/*************************************************************************************** Lista desencolar ********************************************************************************************/
+
+int lista_desencolar(lista_t* lista){
+    if (!lista) {
+        return -1;
+    }
+    return lista_borrar_de_posicion (lista, 0);
+}
+
+/***************************************************************************************** Lista primero *********************************************************************************************/
+
+void* lista_primero(lista_t* lista){
+    if (!lista) {
+        return NULL;
+    }
+
+    return lista_elemento_en_posicion(lista, 0);
+}
+
+/**************************************************************************************** Lista destruir *********************************************************************************************/
+
+void lista_destruir(lista_t* lista){
+    free(lista);
 }
 
 /*****************************************************************************************************************************************************************************************************/

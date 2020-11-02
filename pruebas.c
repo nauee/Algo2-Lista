@@ -32,11 +32,24 @@ void probar_insertar_y_borrar_al_final () {
     pa2m_afirmar(lista_insertar(lista, &elemento4) == 0, "Pude insertar un cuarto elemento");
     pa2m_afirmar(lista_ultimo(lista) == &elemento4, "El 4º elemento es correcto");
     pa2m_afirmar(lista_elementos(lista) == 4, "Quedan 4 elementos en la lista");
-    pa2m_afirmar(lista_borrar(lista) == 0, "Pude borrar de la lista");
-    pa2m_afirmar(lista_ultimo(lista) == &elemento3, "Cambio el ultimo elemento");
+    void* anteultimo = lista_elemento_en_posicion(lista, 2);
+    pa2m_afirmar(lista_borrar(lista) == 0, "Pude borrar el ultimo elemento de la lista");
+    pa2m_afirmar(lista_ultimo(lista) == anteultimo, "El anteultimo elemento ahora es el ultimo");
     pa2m_afirmar(lista_elementos(lista) == 3, "Quedan 3 elementos en la lista");
-    pa2m_afirmar(lista_borrar_de_posicion(lista, 0) == 0, "Pude borrar el 1º elemento");
+    anteultimo = lista_elemento_en_posicion(lista, 1);
+    pa2m_afirmar(lista_borrar(lista) == 0, "Pude borrar el ultimo elemento de la lista");
+    pa2m_afirmar(lista_ultimo(lista) == anteultimo, "El anteultimo elemento ahora es el ultimo");
     pa2m_afirmar(lista_elementos(lista) == 2, "Quedan 2 elementos en la lista");
+    anteultimo = lista_elemento_en_posicion(lista, 0);
+    pa2m_afirmar(lista_borrar(lista) == 0, "Pude borrar el ultimo elemento de la lista");
+    pa2m_afirmar(lista_ultimo(lista) == anteultimo, "El anteultimo elemento ahora es el ultimo");
+    pa2m_afirmar(lista_elementos(lista) == 1, "Queda 1 elemento en la lista");
+    
+    pa2m_afirmar(lista_borrar(lista) == 0, "Pude borrar el ultimo elemento de la lista");
+    pa2m_afirmar(lista_elementos(lista) == 0, "Quedan 0 elementos en la lista");
+    pa2m_afirmar(lista_vacia(lista), "La lista esta vacia");
+    
+    free(lista);
 
 }
 
@@ -44,41 +57,48 @@ void probar_insertar_y_borrar_en_distintas_pos () {
     pa2m_nuevo_grupo("Pruebas insertando y borrando en distintas posiciones");
     lista_t* lista;
     lista = lista_crear();
-    int elemento1 = 1;
-    int elemento2 = 2;
-    int elemento3 = 3;
-    int elemento4 = 4;
-    int extra1 = 34;
-    int extra2 = 354;
-    int extra3 = 999;
-    int extra4 = 21321;
-    int extra5 = 93213219;
-    lista_insertar(lista, &elemento1);
-    lista_insertar(lista, &elemento2);
-    lista_insertar(lista, &elemento3);
-    lista_insertar(lista, &elemento4);
-    pa2m_afirmar(lista_insertar_en_posicion(lista, &extra1, 0) == 0, "Inserte un elemento en la posicion 0");
-    pa2m_afirmar(lista_elemento_en_posicion(lista, 0) == &extra1, "El elemento es correcto");
+    int elemento_1 = 34;
+    int elemento_2 = 354;
+    int elemento_3 = 999;
+    int elemento_4 = 21321;
+    pa2m_afirmar(lista_insertar_en_posicion(lista, &elemento_1, 0) == 0, "Inserte un elemento en la posicion 0");
+    pa2m_afirmar(lista_elemento_en_posicion(lista, 0) == &elemento_1, "El elemento es correcto");
+    pa2m_afirmar(lista_elementos(lista) == 1, "La lista tiene 1 elementos");
+
+    pa2m_afirmar(lista_insertar_en_posicion(lista, &elemento_2, 1) == 0, "Inserte un elemento en la posicion 1");
+    pa2m_afirmar(lista_elemento_en_posicion(lista, 1) == &elemento_2, "El elemento es correcto");
+    pa2m_afirmar(lista_elementos(lista) == 2, "La lista tiene 2 elementos");
+
+    pa2m_afirmar(lista_insertar_en_posicion(lista, &elemento_3, 2) == 0, "Inserte un elemento en la posicion 2");
+    pa2m_afirmar(lista_elemento_en_posicion(lista, 2) == &elemento_3, "El elemento es correcto");
+    pa2m_afirmar(lista_elementos(lista) == 3, "La lista tiene 3 elementos");
+
+    pa2m_afirmar(lista_insertar_en_posicion(lista, &elemento_4, 1) == 0, "Inserte un elemento en la posicion 1");
+    pa2m_afirmar(lista_elemento_en_posicion(lista, 1) == &elemento_4, "El elemento es correcto");
+    pa2m_afirmar(lista_elementos(lista) == 4, "La lista tiene 4 elementos");
+
+    pa2m_afirmar(lista_insertar_en_posicion(lista, NULL, 4) == 0, "Inserte un elemento en la posicion 4");
+    pa2m_afirmar(lista_elemento_en_posicion(lista, 4) == NULL, "El elemento es correcto");
     pa2m_afirmar(lista_elementos(lista) == 5, "La lista tiene 5 elementos");
-    pa2m_afirmar(lista_insertar_en_posicion(lista, &extra2, 3) == 0, "Inserte un elemento en la posicion 3");
-    pa2m_afirmar(lista_elemento_en_posicion(lista, 3) == &extra2, "El elemento es correcto");
-    pa2m_afirmar(lista_elementos(lista) == 6, "La lista tiene 6 elementos");
-    pa2m_afirmar(lista_insertar_en_posicion(lista, &extra3, 4) == 0, "Inserte un elemento en la posicion 4");
-    pa2m_afirmar(lista_elemento_en_posicion(lista, 4) == &extra3, "El elemento es correcto");
-    pa2m_afirmar(lista_elementos(lista) == 7, "La lista tiene 7 elementos");
-    pa2m_afirmar(lista_insertar_en_posicion(lista, &extra4, 2) == 0, "Inserte un elemento en la posicion 2");
-    pa2m_afirmar(lista_elemento_en_posicion(lista, 2) == &extra4, "El elemento es correcto");
-    pa2m_afirmar(lista_elementos(lista) == 8, "La lista tiene 8 elementos");
-    pa2m_afirmar(lista_insertar_en_posicion(lista, &extra5, 8) == 0, "Inserte un elemento en la posicion 8");
-    pa2m_afirmar(lista_elemento_en_posicion(lista, 8) == &extra5, "El elemento es correcto");
-    pa2m_afirmar(lista_elementos(lista) == 9, "La lista tiene 9 elementos");
-    pa2m_afirmar(lista_insertar_en_posicion(lista, NULL, 6) == 0, "Inserte un elemento en la posicion 6");
-    pa2m_afirmar(lista_elemento_en_posicion(lista, 6) == NULL, "El elemento es correcto");
-    pa2m_afirmar(lista_elementos(lista) == 10, "La lista tiene 10 elementos");
+
     pa2m_afirmar(lista_insertar_en_posicion(NULL, NULL, 6) == -1, "No puedo insertar en lista inexistente");
+
     pa2m_afirmar(lista_insertar_en_posicion(lista, NULL, 235) == 0, "Posicion invalida inserta al final");
     pa2m_afirmar(lista_ultimo(lista) == NULL, "El ultimo elemento es correcto");
-    pa2m_afirmar(lista_elementos(lista) == 11, "La lista tiene 11 elementos");
+    pa2m_afirmar(lista_elementos(lista) == 6, "La lista tiene 6 elementos");
+
+    pa2m_afirmar(lista_borrar_de_posicion(lista, 2) == 0,"Borro un elemento en la 2º posicion");
+    pa2m_afirmar(lista_borrar_de_posicion(lista, 4) == 0,"Borro un elemento en la ultima posicion");
+    pa2m_afirmar(lista_borrar_de_posicion(lista, 0) == 0,"Borro un elemento en la primera posicion");
+    pa2m_afirmar(lista_elementos(lista) == 3, "Quedan 3 elementos en la lista");
+    pa2m_afirmar(lista_borrar_de_posicion(NULL, 0) == -1, "No puedo borrar una lista inexistente");
+    pa2m_afirmar(lista_elementos(lista) == 3, "Siguen quedando 3 elementos en la lista");
+    pa2m_afirmar(lista_borrar_de_posicion(lista, 500) == 0, "Borro un elemento en la ultima posicion por poner una posicion inexistente");
+    pa2m_afirmar(lista_borrar_de_posicion(lista, 1) == 0, "Borro un elemento de la ultima posicion");
+    pa2m_afirmar(lista_borrar_de_posicion(lista, 0) == 0, "Borro un elemento en la primera posicion");
+    pa2m_afirmar(lista_vacia(lista), "La lista esta vacia");
+    free (lista);
+
 }
 
 void probar_insertar_y_borrar_10000_elementos () {

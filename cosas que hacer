@@ -6,7 +6,7 @@ lista_insertar_en_posicion ✓
 
 lista_borrar ✓
 
-lista_borrar_de_posicion ~
+lista_borrar_de_posicion ✓
 
 lista_elemento_en_posicion ✓
 
@@ -16,11 +16,11 @@ lista_vacia ✓
 
 lista_elementos ✓
 
-lista_apilar
+lista_apilar ✓
 
-lista_desapilar
+lista_desapilar ✓
 
-lista_tope
+lista_tope 
 
 lista_encolar
 
