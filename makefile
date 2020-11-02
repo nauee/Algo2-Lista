@@ -1,14 +1,14 @@
-CFLAGS=-g -std=c99 -Wall -Werror -Wconversion
+CFLAGS=-g -std=c99 -Wall -Wconversion -Wtype-limits -pedantic -Werror -O0
 
-pruebas: lista.c pruebas.c
-	gcc lista.c pruebas.c $(CFLAGS) -o pruebas
+lista_se: lista.c pruebas.c
+	gcc lista.c pruebas.c $(CFLAGS) -o lista_se
 
-ejecutar: pruebas
+ejecutar: lista_se
 	clear
-	./pruebas
+	./lista_se
 
-debug: pruebas
-	gdb ./pruebas
+debug: lista_se
+	gdb ./lista_se
 
-probar: pruebas
-	valgrind --leak-check=full --track-origins=yes --show-reachable=yes ./pruebas
+probar: lista_se
+	valgrind --leak-check=full --track-origins=yes --show-reachable=yes ./lista_se

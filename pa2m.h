@@ -3,11 +3,11 @@
 
 #include <stdio.h>
 
-#define BLANCO "\e[37;1m"
-#define VERDE "\e[32;1m"
-#define ROJO "\e[31;1m"
-#define AMARILLO "\e[33;1m"
-#define NORMAL "\e[0m"
+#define BLANCO "\033[37;1m"
+#define VERDE "\033[32;1m"
+#define ROJO "\033[31;1m"
+#define AMARILLO "\033[33;1m"
+#define NORMAL "\033[0m"
 
 #define TILDE "✓"
 #define CRUZ "✗"

@@ -1,0 +1,43 @@
+lista_crear ✓
+
+lista_insertar ✓
+
+lista_insertar_en_posicion ✓
+
+lista_borrar ✓
+
+lista_borrar_de_posicion ~
+
+lista_elemento_en_posicion ✓
+
+lista_ultimo ✓
+
+lista_vacia ✓
+
+lista_elementos ✓
+
+lista_apilar
+
+lista_desapilar
+
+lista_tope
+
+lista_encolar
+
+lista_desencolar
+
+lista_primero
+
+lista_destruir
+
+lista_iterador_crear
+
+lista_iterador_tiene_siguiente
+
+lista_iterador_avanzar
+
+lista_iterador_elemento_actual
+
+lista_iterador_destruir
+
+lista_con_cada_elemento

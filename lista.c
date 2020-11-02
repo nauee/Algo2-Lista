@@ -40,6 +40,11 @@ int lista_insertar(lista_t* lista, void* elemento){
     if (lista == NULL){
         return -1;
     }
+    return lista_insertar_en_posicion(lista, elemento, (*lista).cantidad);
+
+    /*if (lista == NULL){
+        return -1;
+    }
 
     nodo_t* nodo = malloc (sizeof(nodo_t));
     if (nodo == NULL) {
@@ -56,8 +61,176 @@ int lista_insertar(lista_t* lista, void* elemento){
         (*(*lista).nodo_fin).siguiente = nodo;
         (*lista).nodo_fin = nodo;
     }
-    (*lista).cantidad ++;
+    ((*lista).cantidad) ++;
+    return 0;*/
+}
+
+/************************************************************************************ Lista insertar en posicion *************************************************************************************/
+
+int lista_insertar_en_posicion(lista_t* lista, void* elemento, size_t posicion) {
+    if (lista == NULL) {
+        return -1;
+    }
+
+    nodo_t* nodo = malloc (sizeof(nodo_t));
+    if (nodo == NULL) {
+            return -1;
+    }
+    (*nodo).elemento = elemento;
+
+    if (posicion > (*lista).cantidad) {
+        posicion = (*lista).cantidad;
+    }
+
+    if ((*lista).cantidad == 0){
+        (*lista).nodo_fin = nodo;
+        (*lista).nodo_inicio = nodo;
+    } else if (posicion == 0) {
+        (*nodo).siguiente = (*lista).nodo_inicio;
+        (*lista).nodo_inicio = nodo;
+    } else if (posicion == (*lista).cantidad) {
+        (*(*lista).nodo_fin).siguiente = nodo;
+        (*nodo).siguiente = NULL;
+        (*lista).nodo_fin = nodo;
+    } else {
+        int i = 0;
+        nodo_t* aux = (*lista).nodo_inicio;
+        while (i < posicion - 1) {
+            aux = (*aux).siguiente;
+            i++;
+        }
+        (*nodo).siguiente = (*aux).siguiente;
+        (*aux).siguiente = nodo;
+    }
+
+    ((*lista).cantidad) ++;
     return 0;
+
+}
+
+/******************************************************************************************* Lista borrar ********************************************************************************************/
+
+int lista_borrar(lista_t* lista){
+
+    if (!lista){
+        return -1;
+    }
+
+    nodo_t* prev = (*lista).nodo_inicio;
+    nodo_t* aux = (*lista).nodo_inicio;
+
+    while ((*aux).siguiente != NULL) {
+        prev = aux;
+        aux = (*aux).siguiente;
+    }
+
+    (*prev).siguiente = NULL;
+    free(aux);
+    ((*lista).nodo_fin) = prev;
+    ((*lista).cantidad) --;
+    
+    return 0;
+}
+
+/************************************************************************************* Lista borrar en posicion **************************************************************************************/
+
+int lista_borrar_de_posicion(lista_t* lista, size_t posicion){
+
+    /*TERMINAR*/
+
+    if (!lista) {
+        return -1;
+    }
+
+    if (posicion == 0){
+        nodo_t* tmp = (*lista).nodo_inicio;
+        (*lista).nodo_inicio = (*tmp).siguiente;
+        free (tmp);
+        (*lista).cantidad --;
+        return 0;
+    }
+
+    int i = 0;
+    nodo_t* prev = (*lista).nodo_inicio;
+    nodo_t* aux = (*lista).nodo_inicio;
+
+    while (i < posicion) {
+        prev = aux;
+        aux = (*aux).siguiente;
+        i++;
+    }
+
+    (*prev).siguiente = NULL;
+    free(aux);
+    ((*lista).nodo_fin) = prev;
+    ((*lista).cantidad) --;
+
+    return 0;
+}
+
+/************************************************************************************ Lista elemento en posicion *************************************************************************************/
+
+void* lista_elemento_en_posicion(lista_t* lista, size_t posicion){
+    if (lista == NULL) {
+        return NULL;
+    }
+
+    if (posicion >= (*lista).cantidad) {
+        return NULL;
+    }
+
+    if (posicion == 0){
+        return (*(*lista).nodo_inicio).elemento;
+    } else if (posicion == ((*lista).cantidad - 1)) {
+        return (*(*lista).nodo_fin).elemento;
+    }
+
+    int i = 0;
+    nodo_t* aux = (*lista).nodo_inicio;
+    while (i <= posicion - 1) {
+        aux = (*aux).siguiente;
+        i++;
+    }
+    return (*aux).elemento;
+}
+
+/******************************************************************************************* Lista ultimo ********************************************************************************************/
+
+void* lista_ultimo(lista_t* lista){
+    
+    if (lista == NULL) {
+        return NULL;
+    }
+    return lista_elemento_en_posicion(lista, (*lista).cantidad - 1);
+    
+    /*if (lista == NULL){
+        return NULL;
+    }
+    if (!(*lista).nodo_fin) {
+        return NULL;
+    }
+
+    return (*(*lista).nodo_fin).elemento;*/
+
+}
+
+/******************************************************************************************** Lista vacia ********************************************************************************************/
+
+bool lista_vacia(lista_t* lista){
+    if(!lista) {
+        return true;
+    }
+    return (*lista).cantidad == 0;
+}
+
+/****************************************************************************************** Lista elementos ******************************************************************************************/
+
+size_t lista_elementos(lista_t* lista){
+    if (lista == NULL) {
+        return 0;
+    } else {
+        return (*lista).cantidad;
+    }
 }
 
 /*****************************************************************************************************************************************************************************************************/
