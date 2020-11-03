@@ -8,7 +8,24 @@ ejecutar: lista_se
 	./lista_se
 
 debug: lista_se
+	clear
 	gdb ./lista_se
 
 probar: lista_se
+	clear
 	valgrind --leak-check=full --track-origins=yes --show-reachable=yes ./lista_se
+
+minipruebas: lista.c lista_minipruebas.c
+	gcc lista.c lista_minipruebas.c $(CFLAGS) -o minipruebas
+
+ejecutar_minipruebas: minipruebas
+	clear
+	./minipruebas
+
+debug_minipruebas: minipruebas
+	clear
+	gdb ./minipruebas
+
+probar_minipruebas: minipruebas
+	clear
+	valgrind --leak-check=full --track-origins=yes --show-reachable=yes ./minipruebas

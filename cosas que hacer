@@ -1,43 +1,118 @@
 lista_crear ✓
+    Pruebas: ✓
+        Se cree bien ✓
 
 lista_insertar ✓
+    Pruebas: ✓
+        Insertar en lista NULL ✓
+        Insertar en una lista con 0 elementos ✓
+        Insertar en una lista con 1 elemento ✓
+        Insertar en una lista con varios elementos ✓
+        Insertar en una lista con varios elementos un NULL ✓
 
 lista_insertar_en_posicion ✓
+    Pruebas: ✓
+        Insertar en lista NULL ✓
+        Insertar en una lista con 0 elementos ✓
+        Insertar en una lista con varios elementos en 1º posicion ✓
+        Insertar en una lista con varios elementos en ultima posicion ✓
+        Insertar en una lista con varios elementos en otras posiciones ✓
+        Insertar en una lista con varios elementos un NULL en cualquier posicion ✓
+        Insertar en una lista con varios elementos en una posicion inexistente ✓
 
 lista_borrar ✓
+    Pruebas: ✓
+        Borrar en lista NULL ✓
+        Borrar en lista vacia ✓
+        Borrar en una lista con varios elementos ✓
+        Borrar en una lista con un solo elemento ✓
 
 lista_borrar_de_posicion ✓
+    Pruebas: ✓
+        Borrar en lista NULL ✓
+        Borrar en lista vacia ✓
+        Borrar en una lista con varios elementos en 1º posicion ✓
+        Borrar en una lista con varios elementos en ultima posicion ✓
+        Borrar en una lista con varios elementos en otras posiciones ✓
+        Borrar en una lista con varios elementos en una posicion inexistente ✓
+        Borrar en una lista con un solo elemento ✓
 
 lista_elemento_en_posicion ✓
+    Pruebas: ✓
+        Mirar elemento en una lista NULL ✓
+        Mirar elemento en una lista vacia ✓
+        Mirar elemento en primera posicion ✓
+        Mirar elemento en ultima posicion ✓
+        Mirar elemento en otra posicion ✓
+        Mirar elemento en posicion inexistente ✓
 
 lista_ultimo ✓
+    Pruebas: ✓
+        Mirar elemento en una lista NULL ✓
+        Mirar elemento en una lista vacia ✓
+        Mirar elemento en ultima posicion ✓
 
 lista_vacia ✓
+    Pruebas: ✓
+        Chequear en una lista NULL ✓
+        Chequear en una lista vacia ✓
+        Chequear en una lista con elementos ✓
 
-lista_elementos ✓
+lista_elementos 
+    Pruebas:
+        Contar elementos en lista inexistente
+        Contar elementos en lista vacia
+        Contar elementos en lista con un elemento
+        Contar elementos en lista con varios elementos
 
-lista_apilar ✓
+lista_apilar
+    Pruebas:
 
-lista_desapilar ✓
+lista_desapilar
+    Pruebas:
 
-lista_tope 
+lista_tope
+    Pruebas:
 
 lista_encolar
+    Pruebas:
 
 lista_desencolar
+    Pruebas:
 
 lista_primero
+    Pruebas:
 
 lista_destruir
+    Pruebas:
 
 lista_iterador_crear
+    Pruebas:
+        Crear iterador en lista vacia
+        Crear iterador en lista nula
+        Crear iterador en lista con varios elementos
 
 lista_iterador_tiene_siguiente
+    Pruebas:
+        Chequear siguiente en una lista vacia
+        Chequear siguiente en una lista con varios elementos
+        Chequear siguiente en una lista NULL
+        Chequear siguiente al final de una lista.
 
 lista_iterador_avanzar
+    Pruebas:
+        Avanzar en una lista vacia.
+        Avanzar en una lista con varios elementos.
+        Avanzar en una lista NULL
+        Avanzar al final de una lista.
 
 lista_iterador_elemento_actual
+    Pruebas:
+
 
 lista_iterador_destruir
+    Pruebas:
+
 
 lista_con_cada_elemento
+    Pruebas

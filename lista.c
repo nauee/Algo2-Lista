@@ -1,26 +1,6 @@
 #include "lista.h"
 #include <stdlib.h>
 
-/*
-
-    typedef struct nodo{
-        void* elemento;
-        struct nodo* siguiente;
-    }nodo_t;
-
-    typedef struct lista{
-        nodo_t* nodo_inicio;
-        nodo_t* nodo_fin;
-        size_t cantidad;
-    }lista_t;
-
-    typedef struct lista_iterador{
-        nodo_t* corriente;
-        lista_t* lista;
-    }lista_iterador_t;
-
-*/
-
 /******************************************************************************************** Lista crear ********************************************************************************************/
 
 lista_t* lista_crear(){
@@ -125,6 +105,10 @@ int lista_borrar(lista_t* lista){
 int lista_borrar_de_posicion(lista_t* lista, size_t posicion){
 
     if (!lista) {
+        return -1;
+    }
+
+    if ((*lista).cantidad == 0){
         return -1;
     }
 
@@ -275,7 +259,93 @@ void* lista_primero(lista_t* lista){
 /**************************************************************************************** Lista destruir *********************************************************************************************/
 
 void lista_destruir(lista_t* lista){
+    if(!lista) {
+        return;
+    }
+    size_t cantidad_a_borrar = (*lista).cantidad;
+    for(int i = 0; i < cantidad_a_borrar; i++){
+        lista_borrar_de_posicion(lista,0);
+    }
     free(lista);
+}
+
+/************************************************************************************* Lista iterador crear ******************************************************************************************/
+
+lista_iterador_t* lista_iterador_crear(lista_t* lista){
+    if (!lista) {
+        return NULL;
+    }
+
+    lista_iterador_t* iterador = malloc (sizeof(lista_iterador_t));
+    if (iterador){
+        (*iterador).corriente = (*lista).nodo_inicio;
+        (*iterador).lista = lista;
+    }
+    return iterador;
+}
+
+/******************************************************************************** Lista iterador tiene siguiente *************************************************************************************/
+
+bool lista_iterador_tiene_siguiente(lista_iterador_t* iterador){
+    if(!iterador) {
+        return false;
+    }
+    return (*iterador).corriente != NULL;
+}
+
+/************************************************************************************ Lista iterador avanzar *****************************************************************************************/
+
+bool lista_iterador_avanzar(lista_iterador_t* iterador){
+    
+    if(!iterador) {
+        return false;
+    }
+
+    if(!lista_iterador_tiene_siguiente(iterador)){
+        return false;
+    } else {
+        (*iterador).corriente = (*(*iterador).corriente).siguiente;
+        return true;
+    }
+
+}
+
+/************************************************************************************ Lista iterador avanzar *****************************************************************************************/
+
+void* lista_iterador_elemento_actual(lista_iterador_t* iterador){
+    if(!iterador) {
+        return NULL;
+    }
+
+    return ((*(*iterador).corriente).elemento);
+}
+
+/*********************************************************************************** Lista iterador destruir *****************************************************************************************/
+
+void lista_iterador_destruir(lista_iterador_t* iterador){
+    free (iterador);
+}
+
+/*********************************************************************************** Lista con cada elemento *****************************************************************************************/
+
+size_t lista_con_cada_elemento(lista_t* lista, bool (*funcion)(void*, void*), void *contexto){
+    if(!lista){
+        return 0;
+    }
+
+    nodo_t* recorrido = (*lista).nodo_inicio;
+    if(!recorrido) {
+        return 0;
+    }
+    size_t cant_recorrida = 1;
+
+    while (funcion((*recorrido).elemento, contexto) && (*recorrido).siguiente) {
+        recorrido = (*recorrido).siguiente;
+        cant_recorrida ++;
+    }
+
+    return cant_recorrida;
+
 }
 
 /*****************************************************************************************************************************************************************************************************/
