@@ -58,33 +58,57 @@ lista_vacia ✓
         Chequear en una lista vacia ✓
         Chequear en una lista con elementos ✓
 
-lista_elementos 
-    Pruebas:
-        Contar elementos en lista inexistente
-        Contar elementos en lista vacia
-        Contar elementos en lista con un elemento
-        Contar elementos en lista con varios elementos
+lista_elementos ✓
+    Pruebas: ✓
+        Contar elementos en lista inexistente ✓
+        Contar elementos en lista vacia ✓
+        Contar elementos en lista con un elemento ✓
+        Contar elementos en lista con varios elementos ✓
 
-lista_apilar
-    Pruebas:
+lista_apilar ✓
+    Pruebas: ✓
+        Apilar en lista NULL ✓
+        Apilar en una lista con 0 elementos ✓
+        Apilar en una lista con 1 elemento ✓
+        Apilar en una lista con varios elementos ✓
+        Apilar en una lista con varios elementos un NULL ✓
 
-lista_desapilar
-    Pruebas:
+lista_desapilar ✓
+    Pruebas: ✓
+        Desapilar en lista NULL ✓
+        Desapilar en lista vacia ✓
+        Desapilar en una lista con varios elementos ✓
+        Desapilar en una lista con un solo elemento ✓
 
-lista_tope
-    Pruebas:
+lista_tope ✓
+    Pruebas: ✓
+        Mirar elemento en una lista NULL ✓
+        Mirar elemento en una lista vacia ✓
+        Mirar elemento en el tope ✓
 
 lista_encolar
     Pruebas:
+        Encolar en lista NULL 
+        Encolar en una lista con 0 elementos 
+        Encolar en una lista con 1 elemento 
+        Encolar en una lista con varios elementos 
+        Encolar en una lista con varios elementos un NULL 
 
 lista_desencolar
     Pruebas:
+        Borrar en lista NULL 
+        Borrar en lista vacia 
+        Borrar en una lista con varios elementos 
+        Borrar en una lista con un solo elemento 
 
 lista_primero
     Pruebas:
+        Mirar elemento en una lista NULL 
+        Mirar elemento en una lista vacia 
+        Mirar elemento en ultima posicion 
 
-lista_destruir
-    Pruebas:
+lista_destruir ✓
+    Pruebas: ✓
 
 lista_iterador_crear
     Pruebas:

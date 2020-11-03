@@ -8,8 +8,20 @@ void llenar_lista_con_caracteres (lista_t* lista, char* string) {
     }
 }
 
+void apilar_lista_con_caracteres(lista_t* pila, char* string){
+    for(int i=0; string[i]!= 0; i++){
+        lista_apilar(pila, &string[i]);
+    }
+}
+
+void encolar_lista_con_caracteres(lista_t* cola, char* string){
+    for(int i=0; string[i]!= 0; i++){
+        lista_encolar(cola, &string[i]);
+    }
+}
+
 void probar_lista_crear () {
-    pa2m_nuevo_grupo("Pruebas de creacion");
+    pa2m_nuevo_grupo("  Pruebas lista_crear  ");
     lista_t* lista = NULL;
     pa2m_afirmar((lista = lista_crear()) != NULL, "Pude crear la lista");
     pa2m_afirmar((*lista).cantidad == 0, "La lista se crea con 0 elementos");
@@ -18,7 +30,7 @@ void probar_lista_crear () {
 }
 
 void probar_lista_insertar () {
-    pa2m_nuevo_grupo("Pruebas insertar");
+    pa2m_nuevo_grupo("  Pruebas lista_insertar  ");
     lista_t* lista = NULL;
     lista = lista_crear();
     int elemento1 = 214214;
@@ -55,7 +67,7 @@ void probar_lista_insertar () {
 }
 
 void probar_lista_insertar_en_posicion () {
-    pa2m_nuevo_grupo("Pruebas insertando en distintas posiciones");
+    pa2m_nuevo_grupo("  Pruebas lista_insertando_en_posicion  ");
     lista_t* lista;
     lista = lista_crear();
     char* letras = "Hola";
@@ -94,7 +106,7 @@ void probar_lista_insertar_en_posicion () {
 
 void probar_lista_borrar () {
 
-    pa2m_nuevo_grupo("Pruebas borrar");
+    pa2m_nuevo_grupo("  Pruebas lista_borrar  ");
     
     lista_t* lista = lista_crear();
     char* letras = "ABCD";
@@ -127,7 +139,7 @@ void probar_lista_borrar () {
 }
 
 void probar_lista_borrar_en_posicion () {
-    pa2m_nuevo_grupo("Pruebas borrar_en_posicion");
+    pa2m_nuevo_grupo("  Pruebas lista_borrar_en_posicion  ");
     
     lista_t* lista = lista_crear();
     char* letras = "ABCDF";
@@ -151,7 +163,7 @@ void probar_lista_borrar_en_posicion () {
 
 void probar_lista_elemento_en_posicion_y_ultimo () {
 
-    pa2m_nuevo_grupo("Pruebas elemento_en_posicion");
+    pa2m_nuevo_grupo("  Pruebas lista_elemento_en_posicion  ");
     
     lista_t* lista = lista_crear();
     char* letras = "ABCDF";
@@ -163,7 +175,7 @@ void probar_lista_elemento_en_posicion_y_ultimo () {
     pa2m_afirmar(lista_elemento_en_posicion(lista, 4) == &letras[4], "Puedo mirar el elemento en ultima posicion");
     pa2m_afirmar(lista_elemento_en_posicion(lista, 2) == &letras[2], "Puedo mirar el elemento en 2º posicion");
 
-    pa2m_nuevo_grupo("Pruebas ultimo");
+    pa2m_nuevo_grupo("  Pruebas lista_ultimo   ");
 
     pa2m_afirmar(lista_ultimo(NULL) == NULL, "No puedo mirar el ultimo elemento en una lista NULL");
     pa2m_afirmar(lista_ultimo(lista) == &letras[4], "Puedo mirar el ultimo elemento");
@@ -180,7 +192,7 @@ void probar_lista_elemento_en_posicion_y_ultimo () {
 
 void probar_lista_vacia () {
 
-    pa2m_nuevo_grupo("Pruebas lista_vacia");
+    pa2m_nuevo_grupo("  Pruebas lista_vacia  ");
 
     lista_t* lista = lista_crear ();
     int elemento = 3;
@@ -195,7 +207,7 @@ void probar_lista_vacia () {
 }
 
 void probar_lista_elementos () {
-    pa2m_nuevo_grupo("Pruebas borrar_en_posicion");
+    pa2m_nuevo_grupo("  Pruebas lista_elementos  ");
     
     lista_t* lista = lista_crear();
     char* letras = "ABCDF";
@@ -217,7 +229,7 @@ void probar_lista_elementos () {
 
 void probar_iterador_externo (){
 
-    pa2m_nuevo_grupo("Pruebas iterador externo");
+    pa2m_nuevo_grupo("  Pruebas iterador externo  ");
     lista_t* lista = lista_crear();
     lista_iterador_t* iterador = NULL;
     lista_iterador_t* iterador_vacio = NULL;
@@ -261,9 +273,227 @@ void probar_iterador_externo (){
     pa2m_afirmar(lista_iterador_avanzar(iterador_vacio) == false, "No puedo avanzar con un iterador en una lista vacia");
 }
 
+void probar_lista_apilar () {
+    pa2m_nuevo_grupo("  Pruebas lista_insertar  ");
+    lista_t* lista = NULL;
+    lista = lista_crear();
+    int elemento1 = 1;
+    int elemento2 = 2;
+    int elemento3 = 3;
+    int elemento4 = 4;
+    pa2m_afirmar(lista_apilar(NULL, NULL) == -1, "No puedo apilar en lista NULL");
+    pa2m_afirmar(lista_elementos(lista) == 0, "La pila tiene 0 elementos");
+
+    pa2m_afirmar(lista_apilar(lista, &elemento1) == 0, "Puedo apilar un elemento");
+    pa2m_afirmar(lista_tope(lista) == &elemento1, "El elemento del tope es el que acabo de ingresar");
+    pa2m_afirmar(lista_elementos(lista) == 1, "La pila tiene 1 elementos");
+
+    pa2m_afirmar(lista_apilar(lista, &elemento2) == 0, "Puedo apilar un segundo elemento");
+    pa2m_afirmar(lista_tope(lista) == &elemento2, "El elemento del tope es el que acabo de ingresar");
+    pa2m_afirmar(lista_elementos(lista) == 2, "La pila tiene 2 elementos");
+
+    pa2m_afirmar(lista_apilar(lista, &elemento3) == 0, "Puedo apilar un tercer elemento");
+    pa2m_afirmar(lista_tope(lista) == &elemento3, "El elemento del tope es el que acabo de ingresar");
+    pa2m_afirmar(lista_elementos(lista) == 3, "La pila tiene 3 elementos");
+
+    pa2m_afirmar(lista_apilar(lista, &elemento4) == 0, "Puedo apilar un cuarto elemento");
+    pa2m_afirmar(lista_tope(lista) == &elemento4, "El elemento del tope es el que acabo de ingresar");
+    pa2m_afirmar(lista_elementos(lista) == 4, "La pila tiene 4 elementos");
+
+    pa2m_afirmar(lista_apilar(lista, NULL) == 0, "Puedo apilar un elemento NULL");
+    pa2m_afirmar(lista_tope(lista) == NULL, "El elemento del tope es el que acabo de ingresar");
+    pa2m_afirmar(lista_elementos(lista) == 5, "La pila tiene 5 elementos");
+
+    for(int i = 0; i < 5; i++) {
+        lista_borrar_de_posicion(lista, 0);
+    }
+    lista_destruir(lista);
+}
+
+void probar_lista_desapilar_y_tope () {
+
+    pa2m_nuevo_grupo("  Pruebas lista_borrar  ");
+    
+    lista_t* lista = lista_crear();
+    char* letras = "oglA";
+    apilar_lista_con_caracteres(lista, letras);
+
+    pa2m_afirmar(lista_desapilar(NULL) == -1, "No puedo desapilar en una lista inexistente");
+    
+    bool mire_elemento_tope = (lista_tope(lista) == &letras[3]);
+
+    void* penultimo = lista_elemento_en_posicion(lista, 1);
+    pa2m_afirmar(lista_desapilar(lista) == 0, "Pude desapilar el ultimo elemento de la lista");
+    pa2m_afirmar(lista_tope(lista) == penultimo, "El elemento siguiente al tope ahora esta en el tope");
+    pa2m_afirmar(lista_elementos(lista) == 3, "Quedan 3 elementos en la lista");
+
+    penultimo = lista_elemento_en_posicion(lista, 1);
+    pa2m_afirmar(lista_desapilar(lista) == 0, "Pude desapilar el ultimo elemento de la lista");
+    pa2m_afirmar(lista_tope(lista) == penultimo, "El elemento siguiente al tope ahora esta en el tope");
+    pa2m_afirmar(lista_elementos(lista) == 2, "Quedan 2 elementos en la lista");
+
+    penultimo = lista_elemento_en_posicion(lista, 1);
+    pa2m_afirmar(lista_desapilar(lista) == 0, "Pude desapilar el ultimo elemento de la lista");
+    pa2m_afirmar(lista_tope(lista) == penultimo, "El elemento siguiente al tope ahora esta en el tope");
+    pa2m_afirmar(lista_elementos(lista) == 1, "Queda 1 elemento en la lista");
+    
+    pa2m_afirmar(lista_desapilar(lista) == 0, "Pude desapilar el ultimo elemento de la lista");
+    pa2m_afirmar(lista_elementos(lista) == 0, "Quedan 0 elementos en la lista");
+
+    pa2m_afirmar(lista_desapilar(lista) == -1, "No puedo desapilar en una lista vacia");
+
+    pa2m_nuevo_grupo("  Pruebas lista_tope  ");
+    pa2m_afirmar(mire_elemento_tope, "Puedo mirar el tope en una pila con elementos");
+    pa2m_afirmar(lista_tope(lista) == NULL, "No puedo mirar el tope en una pila vacia");
+    pa2m_afirmar(lista_tope(NULL) == NULL, "No puedo mirar el tope en una pila inexistente");
+    
+    lista_destruir(lista);
+
+}
+
+void probar_funcionalidades_lista () {
+    pa2m_nuevo_grupo("     Funcionalides de lista     ");
+    printf("\n");
+    probar_lista_crear ();
+    probar_lista_insertar ();
+    probar_lista_insertar_en_posicion ();
+    probar_lista_borrar ();
+    probar_lista_borrar_en_posicion ();
+    probar_lista_elemento_en_posicion_y_ultimo ();
+    probar_lista_vacia ();
+    probar_lista_elementos ();
+}
+
+void probar_funcionalidades_pila () {
+    pa2m_nuevo_grupo("  Pruebas lista_apilar  ");
+    lista_t* pila = NULL;
+    pila = lista_crear();
+    char* letras = "oglA";
+    pa2m_afirmar(lista_apilar(NULL, NULL) == -1, "No puedo apilar en lista NULL");
+    pa2m_afirmar(lista_elementos(pila) == 0, "La pila tiene 0 elementos");
+
+    pa2m_afirmar(lista_apilar(pila, &letras[0]) == 0, "Puedo apilar un elemento");
+    pa2m_afirmar(lista_tope(pila) == &letras[0], "El elemento del tope es el que acabo de ingresar");
+    pa2m_afirmar(lista_elementos(pila) == 1, "La pila tiene 1 elementos");
+
+    pa2m_afirmar(lista_apilar(pila, &letras[1]) == 0, "Puedo apilar un segundo elemento");
+    pa2m_afirmar(lista_tope(pila) == &letras[1], "El elemento del tope es el que acabo de ingresar");
+    pa2m_afirmar(lista_elementos(pila) == 2, "La pila tiene 2 elementos");
+
+    pa2m_afirmar(lista_apilar(pila, &letras[2]) == 0, "Puedo apilar un tercer elemento");
+    pa2m_afirmar(lista_tope(pila) == &letras[2], "El elemento del tope es el que acabo de ingresar");
+    pa2m_afirmar(lista_elementos(pila) == 3, "La pila tiene 3 elementos");
+
+    pa2m_afirmar(lista_apilar(pila, NULL) == 0, "Puedo apilar un elemento NULL");
+    pa2m_afirmar(lista_tope(pila) == NULL, "El elemento del tope es el que acabo de ingresar");
+    pa2m_afirmar(lista_elementos(pila) == 4, "La pila tiene 4 elementos");
+
+    pa2m_afirmar(lista_apilar(pila, &letras[3]) == 0, "Puedo apilar un cuarto elemento");
+    pa2m_afirmar(lista_tope(pila) == &letras[3], "El elemento del tope es el que acabo de ingresar");
+    pa2m_afirmar(lista_elementos(pila) == 5, "La pila tiene 5 elementos");
+
+    pa2m_nuevo_grupo("  Pruebas lista_desapilar  ");
+
+    pa2m_afirmar(lista_desapilar(NULL) == -1, "No puedo desapilar en una lista inexistente");
+    
+    bool mire_elemento_tope = (lista_tope(pila) == &letras[3]);
+
+    void* penultimo = lista_elemento_en_posicion(pila, 1);
+    pa2m_afirmar(lista_desapilar(pila) == 0, "Pude desapilar el ultimo elemento de la pila");
+    pa2m_afirmar(lista_tope(pila) == penultimo, "El elemento siguiente al tope ahora esta en el tope");
+    pa2m_afirmar(lista_elementos(pila) == 4, "Quedan 4 elementos en la pila");
+
+    penultimo = lista_elemento_en_posicion(pila, 1);
+    pa2m_afirmar(lista_desapilar(pila) == 0, "Pude desapilar el ultimo elemento de la pila");
+    pa2m_afirmar(lista_tope(pila) == penultimo, "El elemento siguiente al tope ahora esta en el tope");
+    pa2m_afirmar(lista_elementos(pila) == 3, "Quedan 3 elementos en la pila");
+
+    penultimo = lista_elemento_en_posicion(pila, 1);
+    pa2m_afirmar(lista_desapilar(pila) == 0, "Pude desapilar el ultimo elemento de la pila");
+    pa2m_afirmar(lista_tope(pila) == penultimo, "El elemento siguiente al tope ahora esta en el tope");
+    pa2m_afirmar(lista_elementos(pila) == 2, "Quedan 2 elementos en la pila");
+    
+    pa2m_afirmar(lista_desapilar(pila) == 0, "Pude desapilar el penultimo elemento de la pila");
+    pa2m_afirmar(lista_elementos(pila) == 1, "Queda 1 elemento en la pila");
+
+    pa2m_afirmar(lista_desapilar(pila) == 0, "Pude desapilar el ultimo elemento de la pila");
+    pa2m_afirmar(lista_elementos(pila) == 0, "Quedan 0 elementos en la pila");
+
+    pa2m_afirmar(lista_desapilar(pila) == -1, "No puedo desapilar en una pila vacia");
+
+    pa2m_nuevo_grupo("  Pruebas lista_tope  ");
+    pa2m_afirmar(mire_elemento_tope, "Puedo mirar el tope en una pila con elementos");
+    pa2m_afirmar(lista_tope(pila) == NULL, "No puedo mirar el tope en una pila vacia");
+    pa2m_afirmar(lista_tope(NULL) == NULL, "No puedo mirar el tope en una pila inexistente");
+    
+    lista_destruir(pila);
+}
+
+void probar_funcionalidades_cola () {
+    pa2m_nuevo_grupo("  Pruebas lista_encolar  ");
+    lista_t* cola = NULL;
+    cola = lista_crear();
+    char* letras = "Algo";
+    pa2m_afirmar(lista_encolar(NULL, NULL) == -1, "No puedo encolar en lista NULL");
+    pa2m_afirmar(lista_elementos(cola) == 0, "La cola tiene 0 elementos");
+
+    pa2m_afirmar(lista_encolar(cola, &letras[0]) == 0, "Puedo encolar un elemento");
+    pa2m_afirmar(lista_ultimo(cola) == &letras[0], "El ultimo elemento es el que acaba de ingresar");
+    pa2m_afirmar(lista_elementos(cola) == 1, "La cola tiene 1 elementos");
+
+    pa2m_afirmar(lista_encolar(cola, &letras[1]) == 0, "Puedo encolar un segundo elemento");
+    pa2m_afirmar(lista_ultimo(cola) == &letras[1], "El ultimo elemento es el que acaba de ingresar");
+    pa2m_afirmar(lista_elementos(cola) == 2, "La cola tiene 2 elementos");
+
+    pa2m_afirmar(lista_encolar(cola, &letras[2]) == 0, "Puedo encolar un tercer elemento");
+    pa2m_afirmar(lista_ultimo(cola) == &letras[2], "El ultimo elemento es el que acaba de ingresar");
+    pa2m_afirmar(lista_elementos(cola) == 3, "La cola tiene 3 elementos");
+
+    pa2m_afirmar(lista_encolar(cola, &letras[3]) == 0, "Puedo encolar un cuarto elemento");
+    pa2m_afirmar(lista_ultimo(cola) == &letras[3], "El ultimo elemento es el que acaba de ingresar");
+    pa2m_afirmar(lista_elementos(cola) == 4, "La cola tiene 4 elementos");
+
+    pa2m_afirmar(lista_encolar(cola, NULL) == 0, "Puedo encolar un elemento NULL");
+    pa2m_afirmar(lista_ultimo(cola) == NULL, "El ultimo elemento es el que acaba de ingresar");
+    pa2m_afirmar(lista_elementos(cola) == 5, "La cola tiene 5 elementos");
+
+    pa2m_nuevo_grupo("  Pruebas lista_desencolar  ");
+
+    pa2m_afirmar(lista_desencolar(NULL) == -1, "No puedo desencolar en una cola inexistente");
+    
+    bool mire_elemento_primero = (lista_primero(cola) == &letras[0]);
+
+    void* segundo = lista_elemento_en_posicion(cola, 1);
+    pa2m_afirmar(lista_desencolar(cola) == 0, "Pude desencolar el ultimo elemento de la cola");
+    pa2m_afirmar(lista_primero(cola) == segundo, "El segundo elemento ahora esta primero");
+    pa2m_afirmar(lista_elementos(cola) == 3, "Quedan 3 elementos en la cola");
+
+    segundo = lista_elemento_en_posicion(cola, 1);
+    pa2m_afirmar(lista_desencolar(cola) == 0, "Pude desencolar el ultimo elemento de la cola");
+    pa2m_afirmar(lista_primero(cola) == segundo, "El segundo elemento ahora esta primero");
+    pa2m_afirmar(lista_elementos(cola) == 2, "Quedan 2 elementos en la cola");
+
+    segundo = lista_elemento_en_posicion(cola, 1);
+    pa2m_afirmar(lista_desencolar(cola) == 0, "Pude desencolar el ultimo elemento de la cola");
+    pa2m_afirmar(lista_primero(cola) == segundo, "El segundo elemento ahora esta primero");
+    pa2m_afirmar(lista_elementos(cola) == 1, "Queda 1 elemento en la cola");
+    
+    pa2m_afirmar(lista_desencolar(cola) == 0, "Pude desencolar el ultimo elemento de la cola");
+    pa2m_afirmar(lista_elementos(cola) == 0, "Quedan 0 elementos en la cola");
+
+    pa2m_afirmar(lista_desencolar(cola) == -1, "No puedo desencolar en una cola vacia");
+
+    pa2m_nuevo_grupo("  Pruebas lista_primero  ");
+    pa2m_afirmar(mire_elemento_primero, "Puedo mirar el primero de una cola con elementos");
+    pa2m_afirmar(lista_primero(cola) == NULL, "No puedo mirar el primero en una cola vacia");
+    pa2m_afirmar(lista_primero(NULL) == NULL, "No puedo mirar el primero en una cola inexistente");
+    
+    lista_destruir(cola);
+}
+
 void probar_insertar_y_borrar_10000_elementos () {
     
-    pa2m_nuevo_grupo("Pruebas insertando y borrando 10000 elementos");
+    pa2m_nuevo_grupo("  Pruebas insertando y borrando 10000 elementos  ");
 
     lista_t* lista = lista_crear();
 
@@ -293,20 +523,11 @@ void probar_insertar_y_borrar_10000_elementos () {
     free(lista);
 }
 
-void probar_funcionalidades_lista() {
-    probar_lista_crear ();
-    probar_lista_insertar ();
-    probar_lista_insertar_en_posicion ();
-    probar_lista_borrar ();
-    probar_lista_borrar_en_posicion ();
-    probar_lista_elemento_en_posicion_y_ultimo ();
-    probar_lista_vacia ();
-    probar_lista_elementos ();
-}
 
 int main (){
     probar_funcionalidades_lista ();
+    probar_funcionalidades_pila ();
     //probar_iterador_externo();
-    probar_insertar_y_borrar_10000_elementos();
+    //probar_insertar_y_borrar_10000_elementos();
     pa2m_mostrar_reporte();
 }
