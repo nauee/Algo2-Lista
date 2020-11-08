@@ -582,6 +582,6 @@ int main (){
     probar_funcionalidades_cola ();
     probar_lista_iterador_externo ();
     probar_lista_iterador_interno ();
-    //probar_insertar_y_borrar_10000_elementos();
+    probar_insertar_y_borrar_10000_elementos();
     pa2m_mostrar_reporte();
 }
