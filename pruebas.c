@@ -227,52 +227,6 @@ void probar_lista_elementos () {
 
 }
 
-void probar_iterador_externo (){
-
-    pa2m_nuevo_grupo("  Pruebas iterador externo  ");
-    lista_t* lista = lista_crear();
-    lista_iterador_t* iterador = NULL;
-    lista_iterador_t* iterador_vacio = NULL;
-    char* palabra_de_prueba = "palabra_de_prueba";
-    bool todos_correctos = true;
-    bool recorrio_todos = false;
-    size_t n = 0;
-
-    pa2m_afirmar((iterador_vacio = lista_iterador_crear(NULL)) == NULL, "No puedo crear un iterador externo en una lista invalida");
-    pa2m_afirmar((iterador_vacio = lista_iterador_crear(lista)) != NULL, "Puedo crear un iterador externo en una lista vacia");
-
-    for(int i=0; palabra_de_prueba[i]!= 0; i++){
-        lista_insertar(lista, &palabra_de_prueba[i]);
-    }
-    
-    pa2m_afirmar((iterador = lista_iterador_crear(lista)) != NULL, "Puedo crear un iterador externo en una lista con elementos");   
-    while (lista_iterador_tiene_siguiente(iterador)) {
-        if (*(char*)lista_iterador_elemento_actual(iterador) != *(char*)lista_elemento_en_posicion(lista, n))
-            todos_correctos = false;
-        n++;
-        lista_iterador_avanzar(iterador);
-    }
-
-    if (n == (*lista).cantidad)
-        recorrio_todos = true;
-
-    pa2m_afirmar(recorrio_todos, "El iterador recorrio todos los elementos");
-    pa2m_afirmar(todos_correctos, "El iterador obtuvo todo los elementos de manera correcta");
-    lista_iterador_destruir(iterador);
-
-    for (int j = 0; j <= 13; j++){
-        lista_borrar(lista);
-    }
-
-    iterador = lista_iterador_crear(lista);
-    pa2m_afirmar(lista_iterador_avanzar(NULL) == false, "No puedo avanzar un iterador invalido");
-    pa2m_afirmar(lista_iterador_avanzar(iterador), "Puedo avanzar desde la primera posicion");
-    pa2m_afirmar(lista_iterador_avanzar(iterador), "Puedo avanzar desde la segunda posicion");
-    pa2m_afirmar(lista_iterador_avanzar(iterador), "Puedo avanzar desde la ultima posicion");
-    pa2m_afirmar(lista_iterador_avanzar(iterador) == false, "No puedo avanzar despues la ultima posicion");
-    pa2m_afirmar(lista_iterador_avanzar(iterador_vacio) == false, "No puedo avanzar con un iterador en una lista vacia");
-}
-
 void probar_lista_apilar () {
     pa2m_nuevo_grupo("  Pruebas lista_insertar  ");
     lista_t* lista = NULL;
@@ -466,18 +420,21 @@ void probar_funcionalidades_cola () {
     void* segundo = lista_elemento_en_posicion(cola, 1);
     pa2m_afirmar(lista_desencolar(cola) == 0, "Pude desencolar el ultimo elemento de la cola");
     pa2m_afirmar(lista_primero(cola) == segundo, "El segundo elemento ahora esta primero");
+    pa2m_afirmar(lista_elementos(cola) == 4, "Quedan 4 elementos en la cola");
+
+    segundo = lista_elemento_en_posicion(cola, 1);
+    pa2m_afirmar(lista_desencolar(cola) == 0, "Pude desencolar el ultimo elemento de la cola");
+    pa2m_afirmar(lista_primero(cola) == segundo, "El segundo elemento ahora esta primero");
     pa2m_afirmar(lista_elementos(cola) == 3, "Quedan 3 elementos en la cola");
 
     segundo = lista_elemento_en_posicion(cola, 1);
     pa2m_afirmar(lista_desencolar(cola) == 0, "Pude desencolar el ultimo elemento de la cola");
     pa2m_afirmar(lista_primero(cola) == segundo, "El segundo elemento ahora esta primero");
     pa2m_afirmar(lista_elementos(cola) == 2, "Quedan 2 elementos en la cola");
-
-    segundo = lista_elemento_en_posicion(cola, 1);
-    pa2m_afirmar(lista_desencolar(cola) == 0, "Pude desencolar el ultimo elemento de la cola");
-    pa2m_afirmar(lista_primero(cola) == segundo, "El segundo elemento ahora esta primero");
-    pa2m_afirmar(lista_elementos(cola) == 1, "Queda 1 elemento en la cola");
     
+    pa2m_afirmar(lista_desencolar(cola) == 0, "Pude desencolar el ultimo elemento de la cola");
+    pa2m_afirmar(lista_elementos(cola) == 1, "Queda 1 elemento en la cola");
+
     pa2m_afirmar(lista_desencolar(cola) == 0, "Pude desencolar el ultimo elemento de la cola");
     pa2m_afirmar(lista_elementos(cola) == 0, "Quedan 0 elementos en la cola");
 
@@ -523,11 +480,150 @@ void probar_insertar_y_borrar_10000_elementos () {
     free(lista);
 }
 
+void probar_lista_iterador_externo(){
+
+    pa2m_nuevo_grupo("  Pruebas lista_iterador_crear  ");
+
+    char* prueba = "HOLA";
+    lista_t* lista = lista_crear ();
+    lista_t* lista_vacia = lista_crear ();
+    lista_iterador_t* iterador;
+    lista_iterador_t* iterador_vacio;
+    llenar_lista_con_caracteres(lista, prueba);
+
+    pa2m_afirmar((iterador_vacio = lista_iterador_crear(NULL)) == NULL, "No puedo crear un iterador externo en una lista invalida");
+    pa2m_afirmar((iterador_vacio = lista_iterador_crear(lista_vacia)) != NULL, "Puedo crear un iterador externo en una lista vacia");
+    pa2m_afirmar((iterador = lista_iterador_crear(lista)) != NULL, "Puedo crear un iterador externo en una lista con elementos");   
+
+    pa2m_nuevo_grupo("  Pruebas lista_iterador_avanzar  ");
+
+    pa2m_afirmar(lista_iterador_avanzar(NULL) == false, "No puedo avanzar un iterador invalido");
+    pa2m_afirmar(lista_iterador_avanzar(iterador), "Puedo avanzar desde la primera posicion");
+    pa2m_afirmar(lista_iterador_avanzar(iterador), "Puedo avanzar desde la segunda posicion");
+    pa2m_afirmar(lista_iterador_avanzar(iterador), "Puedo avanzar desde la tercera posicion");
+    pa2m_afirmar(lista_iterador_avanzar(iterador), "Puedo avanzar desde la ultima posicion");
+    pa2m_afirmar(lista_iterador_avanzar(iterador) == false, "No puedo avanzar despues la ultima posicion");
+    pa2m_afirmar(lista_iterador_avanzar(iterador_vacio) == false, "No puedo avanzar con un iterador en una lista vacia");
+    lista_iterador_destruir (iterador);
+
+    pa2m_nuevo_grupo("  Pruebas lista_iterador_elemento_actual  ");
+
+    iterador = lista_iterador_crear(lista);
+    pa2m_afirmar(lista_iterador_elemento_actual(NULL) == NULL, "No puedo ver el elemento en una iterador invalido");
+    pa2m_afirmar(lista_iterador_elemento_actual(iterador_vacio) == NULL, "No puedo ver el elemento en un iterador vacio");
+    pa2m_afirmar(lista_iterador_elemento_actual(iterador) == &prueba[0], "Puedo ver el primer elemento");
+    lista_iterador_avanzar(iterador);
+    pa2m_afirmar(lista_iterador_elemento_actual(iterador) == &prueba[1], "Puedo ver el segundo elemento");
+    lista_iterador_avanzar(iterador);
+    pa2m_afirmar(lista_iterador_elemento_actual(iterador) == &prueba[2], "Puedo ver el tercer elemento");
+    lista_iterador_avanzar(iterador);
+    pa2m_afirmar(lista_iterador_elemento_actual(iterador) == &prueba[3], "Puedo ver el ultimo elemento");
+    lista_iterador_destruir (iterador);
+
+    pa2m_nuevo_grupo("  Pruebas lista_iterador_elemento_actual  ");
+
+    iterador = lista_iterador_crear(lista);
+    pa2m_afirmar(!lista_iterador_tiene_siguiente(NULL), "No puedo ver el siguiente en una lista NULL");
+    pa2m_afirmar(!lista_iterador_tiene_siguiente(iterador_vacio), "No puedo ver el siguiente en una lista vacia");
+    pa2m_afirmar(lista_iterador_tiene_siguiente(iterador), "El primer elemento tiene siguiente");
+    lista_iterador_avanzar(iterador);
+    pa2m_afirmar(lista_iterador_tiene_siguiente(iterador), "El segundo elemento tiene siguiente");
+    lista_iterador_avanzar(iterador);
+    pa2m_afirmar(lista_iterador_tiene_siguiente(iterador), "El tercer elemento tiene siguiente");
+    lista_iterador_avanzar(iterador);
+    pa2m_afirmar(lista_iterador_tiene_siguiente(iterador), "El cuarto elemento tiene siguiente");
+    lista_iterador_avanzar(iterador);
+    pa2m_afirmar(!lista_iterador_tiene_siguiente(iterador), "Despues del ultimo elemento no hay siguiente");
+
+    lista_destruir (lista);
+    lista_destruir (lista_vacia);
+    lista_iterador_destruir (iterador);
+    lista_iterador_destruir (iterador_vacio);
+
+}
+
+/*void probar_iterador_externo (){
+
+    probar_lista_iterador_crear();
+    pa2m_nuevo_grupo("  Pruebas iterador externo  ");
+    lista_t* lista = lista_crear();
+    lista_iterador_t* iterador = NULL;
+    lista_iterador_t* iterador_vacio = NULL;
+    char* palabra_de_prueba = "palabra_de_prueba";
+    bool todos_correctos = true;
+    bool recorrio_todos = false;
+    size_t n = 0;
+
+    pa2m_afirmar((iterador_vacio = lista_iterador_crear(NULL)) == NULL, "No puedo crear un iterador externo en una lista invalida");
+    pa2m_afirmar((iterador_vacio = lista_iterador_crear(lista)) != NULL, "Puedo crear un iterador externo en una lista vacia");
+
+    llenar_lista_con_caracteres (lista, palabra_de_prueba);
+    
+    pa2m_afirmar((iterador = lista_iterador_crear(lista)) != NULL, "Puedo crear un iterador externo en una lista con elementos");   
+    
+    while (lista_iterador_tiene_siguiente(iterador)) {
+        if (*(char*)lista_iterador_elemento_actual(iterador) != *(char*)lista_elemento_en_posicion(lista, n))
+            todos_correctos = false;
+        n++;
+        lista_iterador_avanzar(iterador);
+    }
+
+    if (n == (*lista).cantidad)
+        recorrio_todos = true;
+
+    pa2m_afirmar(recorrio_todos, "El iterador recorrio todos los elementos");
+    pa2m_afirmar(todos_correctos, "El iterador obtuvo todo los elementos de manera correcta");
+    lista_iterador_destruir(iterador);
+
+    for (int j = 0; j <= 13; j++){
+        lista_borrar(lista);
+    }
+
+    iterador = lista_iterador_crear(lista);
+
+    pa2m_afirmar(lista_iterador_avanzar(NULL) == false, "No puedo avanzar un iterador invalido");
+    pa2m_afirmar(lista_iterador_avanzar(iterador), "Puedo avanzar desde la primera posicion");
+    pa2m_afirmar(lista_iterador_avanzar(iterador), "Puedo avanzar desde la segunda posicion");
+    pa2m_afirmar(lista_iterador_avanzar(iterador), "Puedo avanzar desde la ultima posicion");
+    pa2m_afirmar(lista_iterador_avanzar(iterador) == false, "No puedo avanzar despues la ultima posicion");
+    pa2m_afirmar(lista_iterador_avanzar(iterador_vacio) == false, "No puedo avanzar con un iterador en una lista vacia");
+    lista_iterador_destruir(iterador);
+    lista_iterador_destruir(iterador_vacio);
+}*/
+
+bool mostrar_elemento(void* elemento, void* contador){
+    if(elemento && contador)
+        printf("Elemento %i: %c \n", (*(int*)contador)++, *(char*)elemento);
+    return true;
+}
+
+bool avanzar_con_iterador (void* elemento, void* contador) {
+    if(elemento && contador)
+        (*(int*)contador)++;
+    return true;
+}
+
+void probar_lista_iterador_interno () {
+
+    pa2m_nuevo_grupo("  Pruebas lista_con_cada_elemento  ");
+
+    lista_t* lista = lista_crear ();
+    char* prueba = "Algoritmos";
+    int n = 0;
+
+    pa2m_afirmar(lista_con_cada_elemento (NULL, avanzar_con_iterador, &n) == 0, "No puedo recorrer con un iterador interno una lista invalida");
+    pa2m_afirmar(lista_con_cada_elemento (lista, avanzar_con_iterador, &n) == 0, "Recorrer una lista vacia me devuelve 0");
+    llenar_lista_con_caracteres (lista, prueba);
+    pa2m_afirmar(lista_con_cada_elemento (lista, avanzar_con_iterador, &n) == 10, "Recorrer una lista con 10 elementos me devuelve 10");
+    lista_destruir(lista);
+}
 
 int main (){
     probar_funcionalidades_lista ();
     probar_funcionalidades_pila ();
-    //probar_iterador_externo();
-    //probar_insertar_y_borrar_10000_elementos();
+    probar_funcionalidades_cola ();
+    probar_lista_iterador_externo ();
+    probar_lista_iterador_interno ();
+    probar_insertar_y_borrar_10000_elementos();
     pa2m_mostrar_reporte();
 }

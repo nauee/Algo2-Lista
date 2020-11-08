@@ -86,57 +86,63 @@ lista_tope ✓
         Mirar elemento en una lista vacia ✓
         Mirar elemento en el tope ✓
 
-lista_encolar
-    Pruebas:
-        Encolar en lista NULL 
-        Encolar en una lista con 0 elementos 
-        Encolar en una lista con 1 elemento 
-        Encolar en una lista con varios elementos 
-        Encolar en una lista con varios elementos un NULL 
+lista_encolar ✓
+    Pruebas: ✓
+        Encolar en lista NULL ✓
+        Encolar en una lista con 0 elementos ✓
+        Encolar en una lista con 1 elemento ✓
+        Encolar en una lista con varios elementos ✓
+        Encolar en una lista con varios elementos un NULL ✓
 
-lista_desencolar
-    Pruebas:
-        Borrar en lista NULL 
-        Borrar en lista vacia 
-        Borrar en una lista con varios elementos 
-        Borrar en una lista con un solo elemento 
+lista_desencolar ✓
+    Pruebas: ✓
+        Borrar en lista NULL ✓
+        Borrar en lista vacia ✓
+        Borrar en una lista con varios elementos ✓
+        Borrar en una lista con un solo elemento ✓
 
-lista_primero
-    Pruebas:
-        Mirar elemento en una lista NULL 
-        Mirar elemento en una lista vacia 
-        Mirar elemento en ultima posicion 
+lista_primero ✓
+    Pruebas: ✓
+        Mirar elemento en una lista NULL ✓
+        Mirar elemento en una lista vacia ✓
+        Mirar elemento en ultima posicion ✓
 
 lista_destruir ✓
     Pruebas: ✓
 
-lista_iterador_crear
-    Pruebas:
-        Crear iterador en lista vacia
-        Crear iterador en lista nula
-        Crear iterador en lista con varios elementos
+lista_iterador_crear ✓
+    Pruebas: ✓
+        Crear iterador en lista vacia ✓
+        Crear iterador en lista nula ✓
+        Crear iterador en lista con varios elementos ✓
 
-lista_iterador_tiene_siguiente
-    Pruebas:
-        Chequear siguiente en una lista vacia
-        Chequear siguiente en una lista con varios elementos
-        Chequear siguiente en una lista NULL
-        Chequear siguiente al final de una lista.
+lista_iterador_tiene_siguiente ✓
+    Pruebas: ✓
+        Chequear siguiente en una lista vacia ✓
+        Chequear siguiente en una lista con varios elementos ✓
+        Chequear siguiente en una lista NULL ✓
+        Chequear siguiente al final de una lista. ✓
 
-lista_iterador_avanzar
-    Pruebas:
-        Avanzar en una lista vacia.
-        Avanzar en una lista con varios elementos.
-        Avanzar en una lista NULL
-        Avanzar al final de una lista.
+lista_iterador_avanzar ✓
+    Pruebas: ✓
+        Avanzar en una lista vacia. ✓
+        Avanzar en una lista con varios elementos. ✓
+        Avanzar en una lista NULL. ✓
+        Avanzar al final de una lista. ✓
 
-lista_iterador_elemento_actual
-    Pruebas:
+lista_iterador_elemento_actual ✓
+    Pruebas: ✓
+        Ver el elemento en una lista NULL. ✓
+        Ver el elemento en una lista vacia. ✓
+        Ver el primero elemento. ✓
+        Ver el elemento en otra posicion. ✓
+        Ver el elemento al final de una lista. ✓
 
+lista_iterador_destruir ✓
 
-lista_iterador_destruir
-    Pruebas:
-
-
-lista_con_cada_elemento
-    Pruebas
+lista_con_cada_elemento ✓
+    Pruebas: ✓
+        Recorrer con un iterador NULL ✓
+        Recorrer con un iterador una lista NULL ✓
+        Recorrer con un iterador una lista vacia ✓
+        Recorrer con un iterador una lista con varios elementos ✓

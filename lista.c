@@ -301,7 +301,7 @@ bool lista_iterador_avanzar(lista_iterador_t* iterador){
         return false;
     }
 
-    if(!lista_iterador_tiene_siguiente(iterador)){
+    if(!(*iterador).corriente){
         return false;
     } else {
         (*iterador).corriente = (*(*iterador).corriente).siguiente;
@@ -314,6 +314,9 @@ bool lista_iterador_avanzar(lista_iterador_t* iterador){
 
 void* lista_iterador_elemento_actual(lista_iterador_t* iterador){
     if(!iterador) {
+        return NULL;
+    }
+    if(!(*iterador).corriente){
         return NULL;
     }
 
