@@ -468,7 +468,11 @@ void probar_lista_iterador_externo(){
 
     pa2m_afirmar((iterador_vacio = lista_iterador_crear(NULL)) == NULL, "No puedo crear un iterador externo en una lista invalida");
     pa2m_afirmar((iterador_vacio = lista_iterador_crear(lista_vacia)) != NULL, "Puedo crear un iterador externo en una lista vacia");
+    pa2m_afirmar((*iterador_vacio).lista == lista_vacia, "El iterador es de la lista correspondiente");
+    pa2m_afirmar((*iterador_vacio).corriente == NULL, "El iterador apunta al nodo inicio de la lista (NULL por estar vacia)");
     pa2m_afirmar((iterador = lista_iterador_crear(lista)) != NULL, "Puedo crear un iterador externo en una lista con elementos");   
+    pa2m_afirmar((*iterador).lista == lista, "El iterador es de la lista correspondiente");
+    pa2m_afirmar((*iterador).corriente == (*lista).nodo_inicio, "El iterador apunta al nodo inicio de la lista");
 
     pa2m_nuevo_grupo("  Pruebas lista_iterador_avanzar  ");
 
@@ -517,12 +521,6 @@ void probar_lista_iterador_externo(){
 
 }
 
-bool mostrar_elemento(void* elemento, void* contador){
-    if(elemento && contador)
-        printf("Elemento %i: %c \n", (*(int*)contador)++, *(char*)elemento);
-    return true;
-}
-
 bool avanzar_con_iterador (void* elemento, void* contador) {
     if(elemento && contador)
         (*(int*)contador)++;
@@ -544,34 +542,37 @@ void probar_lista_iterador_interno () {
     lista_destruir(lista);
 }
 
-void probar_insertar_y_borrar_10000_elementos () {
+void probar_insertar_y_borrar_100000_elementos () {
     
-    pa2m_nuevo_grupo("  Pruebas insertando y borrando 10000 elementos  ");
+    pa2m_nuevo_grupo("  Pruebas insertando y borrando 100000 elementos  ");
 
     lista_t* lista = lista_crear();
 
     bool pude_insertar_todo = true;
-    for (unsigned long i = 0; i < 10000; i++) {
+    for (unsigned long i = 0; i < 100000; i++) {
         if (lista_insertar_en_posicion(lista, (void*)i, i) == -1){
             pude_insertar_todo = false;
         }
     }
-    pa2m_afirmar(pude_insertar_todo, "Pude insertar 10000 elementos");
-    pa2m_afirmar(lista_elementos(lista) == 10000, "La lista tiene 10000 elementos");
+    pa2m_afirmar(pude_insertar_todo, "Pude insertar 100000 elementos");
+    pa2m_afirmar(lista_elementos(lista) == 100000, "La lista tiene 100000 elementos");
     bool son_todos_validos = true;
-    for (unsigned long i = 0; i < 10000; i++) {
-        if (lista_elemento_en_posicion(lista, i) != (void*)i){
+    lista_iterador_t* iterador = lista_iterador_crear (lista);
+    for (unsigned long i = 0; i < 100000; i++) {
+        if (lista_iterador_elemento_actual(iterador) != (void*)i){
             son_todos_validos = false;
         }
+        lista_iterador_avanzar (iterador);
     }
-    pa2m_afirmar(son_todos_validos, "Los 10000 elementos de la lista son validos");
+    lista_iterador_destruir (iterador);
+    pa2m_afirmar(son_todos_validos, "Los 100000 elementos de la lista son validos");
     bool pude_borrar_todos = true;
-    for (unsigned long i = 0; i < 10000; i++) {
+    for (unsigned long i = 0; i < 100000; i++) {
         if(lista_borrar_de_posicion(lista,0) == -1) {
             pude_borrar_todos = false;
         }
     }
-    pa2m_afirmar(pude_borrar_todos, "Pude borrar los 10000 elementos de la lista");
+    pa2m_afirmar(pude_borrar_todos, "Pude borrar los 100000 elementos de la lista");
     pa2m_afirmar(lista_vacia(lista), "La lista esta vacia");
     lista_destruir(lista);
 }
@@ -582,6 +583,6 @@ int main (){
     probar_funcionalidades_cola ();
     probar_lista_iterador_externo ();
     probar_lista_iterador_interno ();
-    probar_insertar_y_borrar_10000_elementos();
+    probar_insertar_y_borrar_100000_elementos();
     pa2m_mostrar_reporte();
 }
