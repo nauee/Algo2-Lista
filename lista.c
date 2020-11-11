@@ -306,7 +306,7 @@ bool lista_iterador_avanzar(lista_iterador_t* iterador){
         return false;
     }
 
-    if(lista_iterador_tiene_siguiente(iterador)){
+    if(!lista_iterador_tiene_siguiente(iterador)){
         return false;
     } else {
         (*iterador).corriente = (*(*iterador).corriente).siguiente;
