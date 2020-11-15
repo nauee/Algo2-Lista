@@ -79,7 +79,7 @@ void probar_lista_insertar_borrar () {
 }
 
 void probar_lista_insertar_borrar_en_posicion () {
-    pa2m_nuevo_grupo("  Pruebas lista_insertando_en_posicion  ");
+    pa2m_nuevo_grupo("  Pruebas lista_insertar_en_posicion  ");
     lista_t* lista;
     lista = lista_crear();
     char* letras = "Hola";
@@ -284,6 +284,10 @@ void probar_funcionalidades_cola () {
 
 void probar_lista_iterador_externo(){
 
+    printf("\n");
+    pa2m_nuevo_grupo("     Funcionalides de iterador     ");
+    printf("\n");
+
     pa2m_nuevo_grupo("  Pruebas lista_iterador_crear  ");
 
     char* prueba = "HOLA";
@@ -326,7 +330,7 @@ void probar_lista_iterador_externo(){
     pa2m_afirmar(lista_iterador_elemento_actual(iterador) == &prueba[3], "Puedo ver el ultimo elemento");
     lista_iterador_destruir (iterador);
 
-    pa2m_nuevo_grupo("  Pruebas lista_iterador_elemento_actual  ");
+    pa2m_nuevo_grupo("  Pruebas lista_iterador_tiene_siguiente  ");
 
     iterador = lista_iterador_crear(lista);
     pa2m_afirmar(!lista_iterador_tiene_siguiente(NULL), "No puedo ver el siguiente en una lista NULL");
