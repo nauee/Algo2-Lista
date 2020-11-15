@@ -1,7 +1,5 @@
 **************************************************************************************** Nahuel Castro 106551 *****************************************************************************************
 
-ACLARACION: Cambiar "__makefile" por "makefile" (esto es por un error en la entrega).
-
 Acerca de la entrega:
     La entrega consiste en una implementacion de una lista de nodos simplemente enlazados. 
     Tambien puede ser utilizado como pila o cola si es que asi se lo desea.
@@ -58,7 +56,7 @@ Funcionamiento:
     reallocs (esto hace aumentar la complejidad algoritmica ya que en el peor de los casos realloc copiara todos los elementos a un nuevo bloque
     de memoria lo que genera una complejidad de O(n)).
     En mi caso puntual, decidi no utilizar ninguna funcionalidad recursiva, ya que creo que los metodos iterativos son mas que suficientes para
-    llevar a cabo la funcionalidad completa de una lista. Por lo que en su gran mayoria use ciclos whiles y en algunos casos puntuales como para
+    llevar a cabo la funcionalidad completa de una lista. Por lo que en su gran mayoria use ciclos whiles y en algunos casos puntuales como el de
     lista_destruir use ciclos for.
 
 Explicaciones:
@@ -66,7 +64,7 @@ Explicaciones:
         Una lista es una estructura lineal que almacena elementos, en este caso almacena nodos, en donde cada nodo puede
         almacenar datos y punteros a otros nodos. De esta manera los nodos quedan relacionados y no se necesita que la memoria
         reservada para la lista sea contigua. La lista tiene ciertas funcionalidades como crear, destruir, insertar en cualquier posicion, 
-        borrar de cualquier posicion y obtener el elemento de cualquier posicion. 
+        borrar de cualquier posicion, obtener el elemento de cualquier posicion y ver la cantidad de elementos o si esta vacia.
         La diferencia entre ser simple o doblemente enlazada es que en el primero de los casos cada nodo contiene un puntero que apunta
         al siguiente nodo de la lista; en el caso de las listas doblemente enlazadas, cada nodo contiene ademas otro puntero que 
         apunta al nodo anterior de la lista.
@@ -78,8 +76,8 @@ Explicaciones:
         Tiene ciertas funcionalidades como : crear, destruir, ver_primero, encolar, desencolar. A diferencia de la lista, solo podemos insertar
         elementos en el final, y sacar elementos del principio. Lo que nos limita a que el primer elemento insertado sea el primero en salir (FIFO).
     ¿Qué es un iterador? ¿Cuál es su función?
-        Es un elemento que nos permite recorrer secuencialmente un contenedor de datos, en este caso una lista. La ventaja principal es poder
-        guardar "por donde" vamos recorriendo el contenedor lo que hace que sea mas rapido recorrer todos los elementos del vector.
+        Es un elemento que nos permite recorrer secuencialmente un contenedor de datos, en este caso una lista, sin necesidad de conocer su estructura interna.
+        La ventaja principal es poder guardar "por donde" vamos recorriendo el contenedor lo que hace que sea mas rapido recorrer todos los elementos del vector.
     ¿En qué se diferencia un iterador interno de uno externo?
         En el caso de un iterador interno, este realiza todo el ciclo sin que el usuario pueda controlarlo manualmente. En cambio un iterador
         externo provee funcionalidades para que el usuario pueda manejar el ciclo de recorrido del iterador y pueda decidir cuando avanzar, cuando
