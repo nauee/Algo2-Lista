@@ -310,7 +310,11 @@ bool lista_iterador_avanzar(lista_iterador_t* iterador){
         return false;
     } else {
         (*iterador).corriente = (*(*iterador).corriente).siguiente;
-        return true;
+        if (!(*iterador).corriente){
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }
@@ -340,7 +344,7 @@ void lista_iterador_destruir(lista_iterador_t* iterador){
 
 size_t lista_con_cada_elemento(lista_t* lista, bool (*funcion)(void*, void*), void *contexto){
     
-    if(!lista){
+    if(!lista || !funcion){
         return 0;
     }
 

@@ -1,8 +1,40 @@
 **************************************************************************************** Nahuel Castro 106551 *****************************************************************************************
 
+ACLARACION: Cambiar "__makefile" por "makefile" (esto es por un error en la entrega).
+
 Acerca de la entrega:
     La entrega consiste en una implementacion de una lista de nodos simplemente enlazados. 
-    Ademas puede ser utilizado como pila o cola si es que asi se lo desea.
+    Tambien puede ser utilizado como pila o cola si es que asi se lo desea.
+    Ademas la entrega tambien contiene funcionalidades de iterador tanto externo como interno.
+    Cuenta con las siguientes funciones:
+     -> Funciones generales:
+         -> lista_crear
+         -> lista_elementos
+         -> lista_destruir
+         -> lista_vacia
+     -> Funciones de lista:
+         -> lista_insertar
+         -> lista_insertar_en_posicion
+         -> lista_borrar
+         -> lista_borrar_de_posicion
+         -> lista_elemento_en_posicion
+         -> lista_ultimo
+     -> Funciones de pila:
+         -> lista_apilar
+         -> lista_desapilar
+         -> lista_tope
+     -> Funciones de cola:
+         -> lista_encolar
+         -> lista_desencolar
+         -> lista_primero
+     -> Funciones de iterador externo:
+         -> lista_iterador_crear
+         -> lista_iterador_tiene_siguiente
+         -> lista_iterador_avanzar
+         -> lista_iterador_elemento_actual
+         -> lista_iterador_destruir
+     -> Funciones de iterador interno:
+         -> lista_con_cada_elemento
 
 Linea de compilacion:
     Puede compilarse escribiendo make (compila con mis pruebas) o make_minipruebas (compila con las minipruebas).
@@ -23,8 +55,8 @@ Lineas extras:
 Funcionamiento:
     La implementacion realizada es mediante nodos simplemente enlazados, esta cuenta con una gran ventaja y es que no existe la necesidad de que
     la memoria necesaria para la lista sea contigua, lo que nos permite almacenar mas datos y es mas eficiente ya que no necesitamos hacer
-    reallocs (esto hace aumentar la complejidad algoritmica ya que en el peor de los casos realloc copiara todos los elementos a una nueva posicion
-    lo que genera una complejidad de O(n)).
+    reallocs (esto hace aumentar la complejidad algoritmica ya que en el peor de los casos realloc copiara todos los elementos a un nuevo bloque
+    de memoria lo que genera una complejidad de O(n)).
     En mi caso puntual, decidi no utilizar ninguna funcionalidad recursiva, ya que creo que los metodos iterativos son mas que suficientes para
     llevar a cabo la funcionalidad completa de una lista. Por lo que en su gran mayoria use ciclos whiles y en algunos casos puntuales como para
     lista_destruir use ciclos for.
